@@ -1,0 +1,9 @@
+# AlgoritmoPerceptron
+ Perceptron
+- Programar o neurônio do Perceptron visto em aula. Considerar somente duas dimensões.
+- Entrada do Algoritmo: Um arquivo txt com os pontos x1 e x2 , a classe a qual pertence (0 ou 1) e a
+taxa de aprendizado a ser utilizada. Lembre-se que o exemplo deve ser linearmente separável!
+- Imprimir o plano cartesiano com o hiperplano separador (uma reta) a cada correção do algoritmo.
+- As correções devem ser efetuadas assim que um erro for encontrado.
+- Dica: Se programar com C ou C++ é aconselhável usar o Gnuplot.
+- Saída: A equação da reta que separa corretamente.
