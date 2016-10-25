@@ -12,9 +12,28 @@ import java.util.Scanner;
  * @author Gilson
  */
 public class Perce {
+    public static int tam=16;
+    static int[][] pontos = {
+            {0, 0, -1},
+            {0, 1, -1},
+            {0, 2, -1},
+            {0, 3, 1},
+            {1, 0, -1},
+            {1, 1, -1},
+            {1, 2, -1},
+            {1, 3, 1},
+            {2, 0, -1},
+            {2, 1, -1},
+            {2, 2, -1},
+            {2, 3, 1},
+            {3, 2, 1},
+            {3, 3, 1},
+            {4, 2, 1},
+            {4, 3, 1}
+        };
 
-    static double w1, w2, n, r;
-    static Scanner ler = new Scanner(System.in);
+    public static double w1=1, w2=1, n=0.5, r=1;
+    public static Scanner ler = new Scanner(System.in);
 
     public static void preencher() {
         System.out.println("Digite a taxa de aprendizado: ");
@@ -52,33 +71,15 @@ public class Perce {
         return true;
     }
 
-    public static void calcular() {
-        preencher();
+    public static double[] calcular() {
+        //preencher();
         double w3=-r;
-        boolean[] verifica=new boolean[16];
+        boolean[] verifica=new boolean[tam];
         boolean fim=false;
         int x1,x2,x3=1,t;
-        double f;
-        int[][] pontos = {
-            {0, 0, -1},
-            {0, 1, -1},
-            {0, 2, -1},
-            {0, 3, 1},
-            {1, 0, -1},
-            {1, 1, -1},
-            {1, 2, -1},
-            {1, 3, 1},
-            {2, 0, -1},
-            {2, 1, -1},
-            {2, 2, -1},
-            {2, 3, 1},
-            {3, 2, 1},
-            {3, 3, 1},
-            {4, 2, 1},
-            {4, 3, 1}
-        };
+        double f;        
         while (!fim) {
-            for (int i = 0; i < 16; i++) {
+            for (int i = 0; i < tam; i++) {
                 x1=pontos[i][0];
                 x2=pontos[i][1];
                 t=pontos[i][2];
@@ -106,6 +107,8 @@ public class Perce {
             System.out.println("Sua função é essa? > " + w1 + "X1+" + w2 + "X2=" + r);
         else
             System.out.println("Sua função é essa? > " + w1 + "X1" + w2 + "X2=" + r);
+        double[] vet = {w1,-w2,r};
+        return vet;
 
     }
 }
