@@ -151,6 +151,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
         g1.draw(l);
         l = new Line2D.Double(0 + constanteX, 364, 0 + constanteX, 0);
         g1.draw(l);
+        double a=vet[0],b=-vet[1],c=vet[2];
+        String str;
+        if(b>0)
+            str=""+a+"x1 + "+b+"x2 = "+c;
+        else
+            str=""+a+"x1 - "+b+"x2 = "+c;
+        g.drawString(str,(int)constanteX+30,(int)constanteY-30);
         for (int k = -500; k < 500; k += 10) {
             l = new Line2D.Double(k + constanteX, 182 + tam, k + constanteX, 182 - tam);
             g1.draw(l);
@@ -169,10 +176,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
         int tam = 4;
         double x = (vet[1] * y + vet[2]) / vet[0];
         double x1 = (vet[1] * (y1) + vet[2]) / vet[0];
+        
         Shape l = new Line2D.Double(x * 10 + constanteX, y * 10 + constanteY, x1 * 10 + constanteX, y1 * 10 + constanteY);
         g1.draw(l);
         l = new Line2D.Double(0 + constanteX, 364, 0 + constanteX, 0);
         g1.draw(l);
+        double a=vet[0],b=-vet[1],c=vet[2];
+        String str=""+a+"x1 + "+b+"x2 = "+c;
+        g.drawString(str,(int)constanteX+30,(int)constanteY-30);
         for (int k = -500; k < 500; k += 10) {
             l = new Line2D.Double(k + constanteX, 182 + tam, k + constanteX, 182 - tam);
             g1.draw(l);
