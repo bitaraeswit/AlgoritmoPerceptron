@@ -10,6 +10,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Shape;
 import java.awt.geom.Line2D;
+import java.util.Scanner;
+import perceptron.Perceptron;
 
 /**
  *
@@ -24,12 +26,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
      */
     public JFramePrincipal() {
         initComponents();
-    }
-
-    public JFramePrincipal(boolean b) {
-        primeiro = b;
-        initComponents();
-        
     }
 
     /**
@@ -128,78 +124,102 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanelPrincipalMouseReleased
 
     private void jPanelPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelPrincipalMouseClicked
-        desenharPontos(jPanelPrincipal.getGraphics());
-        desenhar(jPanelPrincipal.getGraphics());
+
     }//GEN-LAST:event_jPanelPrincipalMouseClicked
     double constanteX = 263, constanteY = 182;
-    
-    public void dese(){
-        
-            desenharPontos(jPanelPrincipal.getGraphics());
-            desenharReta1(jPanelPrincipal.getGraphics());
-        
+
+    public void desenhar(double[] vet){
+        desenharPontos(jPanelPrincipal.getGraphics());
+        desenhar(jPanelPrincipal.getGraphics(),vet);
     }
 
-    public void desenharReta1(Graphics g) {
+    public void dese() {
+        try {
+            Thread.sleep(50);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        desenharPontos(jPanelPrincipal.getGraphics()); 
+        try {
+            Thread.sleep(50);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        desenharReta(jPanelPrincipal.getGraphics());
+        try {
+            Thread.sleep(4000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        jPanelPrincipal.repaint();
+    }
+
+
+    public void desenharReta(Graphics g) {
         int y = -100, y1 = 100;
         Graphics2D g1 = (Graphics2D) g;
-        double[] vet = {Perce.w1, -Perce.w2, Perce.r};
+        double[] vet = {Perceptron.w1, -Perceptron.w2, Perceptron.r};
         int tam = 4;
         double x = (vet[1] * y + vet[2]) / vet[0];
         double x1 = (vet[1] * (y1) + vet[2]) / vet[0];
-        Shape l = new Line2D.Double(x * 10 + constanteX, y * 10 + constanteY, x1 * 10 + constanteX, y1 * 10 + constanteY);
-        g1.draw(l);
-        l = new Line2D.Double(0 + constanteX, 364, 0 + constanteX, 0);
-        g1.draw(l);
-        double a=vet[0],b=-vet[1],c=vet[2];
+        Shape l;       
+        double a = vet[0], b = -vet[1], c = vet[2];
         String str;
-        if(b>0)
-            str=""+a+"x1 + "+b+"x2 = "+c;
-        else
-            str=""+a+"x1 - "+b+"x2 = "+c;
-        g.drawString(str,(int)constanteX+30,(int)constanteY-30);
+        if (b > 0) {
+            str = "" + a + "x1 + " + b + "x2 = " + c;
+        } else {
+            str = "" + a + "x1 - " + b + "x2 = " + c;
+        }        
+        l = new Line2D.Double(x * 10 + constanteX, y * 10 + constanteY, x1 * 10 + constanteX, y1 * 10 + constanteY);
+        g1.draw(l); 
+        l = new Line2D.Double(0 + constanteX, 364, 0 + constanteX, 0);
+        g1.draw(l);
+        l = new Line2D.Double(526, 0 + constanteY, 0, 0 + constanteY);
+        g1.draw(l);
+        g1.drawString(str, (int) constanteX + 30, (int) constanteY - 30);
+        g1.drawString("Ciclo: "+Perceptron.ciclo, (int) constanteX + 30, (int) constanteY - 50);
         for (int k = -500; k < 500; k += 10) {
             l = new Line2D.Double(k + constanteX, 182 + tam, k + constanteX, 182 - tam);
             g1.draw(l);
             l = new Line2D.Double(263 + tam, k + constanteY, 263 - tam, k + constanteY);
             g1.draw(l);
         }
-        l = new Line2D.Double(526, 0 + constanteY, 0, 0 + constanteY);
-        g1.draw(l);
-
-    }
-
-    public void desenhar(Graphics g) {
+        
+    }  
+    public void desenhar(Graphics g,double[] vet) {
         int y = -100, y1 = 100;
-        Graphics2D g1 = (Graphics2D) g;
-        double[] vet = Perce.calcular();
+        Graphics2D g1 = (Graphics2D) g;        
         int tam = 4;
         double x = (vet[1] * y + vet[2]) / vet[0];
         double x1 = (vet[1] * (y1) + vet[2]) / vet[0];
-        
         Shape l = new Line2D.Double(x * 10 + constanteX, y * 10 + constanteY, x1 * 10 + constanteX, y1 * 10 + constanteY);
         g1.draw(l);
         l = new Line2D.Double(0 + constanteX, 364, 0 + constanteX, 0);
         g1.draw(l);
-        double a=vet[0],b=-vet[1],c=vet[2];
-        String str=""+a+"x1 + "+b+"x2 = "+c;
-        g.drawString(str,(int)constanteX+30,(int)constanteY-30);
+        l = new Line2D.Double(526, 0 + constanteY, 0, 0 + constanteY);
+        g1.draw(l);
+        double a = vet[0], b = -vet[1], c = vet[2];
+        String str;
+        if (b > 0) {
+            str = "" + a + "x1 + " + b + "x2 = " + c;
+        } else {
+            str = "" + a + "x1 - " + b + "x2 = " + c;
+        }
+        g1.drawString(str, (int) constanteX + 30, (int) constanteY - 30);
+        g1.drawString("Ultimo ciclo = "+Perceptron.ciclo, (int) constanteX + 30, (int) constanteY - 50);
         for (int k = -500; k < 500; k += 10) {
             l = new Line2D.Double(k + constanteX, 182 + tam, k + constanteX, 182 - tam);
             g1.draw(l);
             l = new Line2D.Double(263 + tam, k + constanteY, 263 - tam, k + constanteY);
             g1.draw(l);
-        }
-        l = new Line2D.Double(526, 0 + constanteY, 0, 0 + constanteY);
-        g1.draw(l);
-
+        }       
     }
 
     public void desenharPontos(Graphics g) {
         Shape l;
         Graphics2D g1 = (Graphics2D) g;
-        int[][] pontos = Perce.pontos;
-        for (int k = 0; k < Perce.tam; k++) {
+        int[][] pontos = Perceptron.pontos;
+        for (int k = 0; k < 16; k++) {
             l = new Line2D.Double(pontos[k][0] * 10 + constanteX, pontos[k][1] * 10 + constanteY, pontos[k][0] * 10 + constanteX, pontos[k][1] * 10 + constanteY);
             if (pontos[k][2] == 1) {
                 g1.setColor(Color.red);
@@ -213,7 +233,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JInternalFrame jInternalFrame1;
